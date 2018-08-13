@@ -7,6 +7,7 @@ Self-Driving Car Engineer Nanodegree Program
 * The Model
 
 The vehicle model is a simplified model, namely bicycle model as follows:
+
      ```
 			x_[t+1] = x[t] + v[t] * cos(psi[t]) * dt
 			y_[t+1] = y[t] + v[t] * sin(psi[t]) * dt
