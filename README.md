@@ -3,6 +3,16 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+## Rubric Points
+* 1. The Model
+
+* 2. Timestep Length and Elaspsed Duration (N & dt)
+
+* 3. Polynomial Fitting and MPC Preprocessing
+
+* 4. Model Predictive Control with Latency
+
+
 ## Dependencies
 
 * cmake >= 3.5
