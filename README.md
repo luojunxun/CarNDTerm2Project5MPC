@@ -36,11 +36,22 @@ All calculations should be performed in vehicle coordinates. Since the waypoints
 
 Additionally, the state of the vehicle should be initialized as:
 
-		state << 0.0, 0.0, 0.0, v, cte, e_psi; //states in vehicle coordinates: x, y, psi, v, cte, e_psi
-		
+		//States in vehicle coordinates: x, y, psi, v, cte, e_psi
+		state << 0.0, 0.0, 0.0, v, cte, e_psi; 
 
 * Model Predictive Control with Latency
 
+With a system delay of 100 ms, the actuations are applied one timestep later (dt=0.1). Here shows how I deal with latency:
+
+		unsigned int latency_steps = 1; // actuator delay = 100 ms
+
+		// Consider actuation latency
+		if (t > latency_steps) {
+			delta0 = vars[delta_start + t - 1 - latency_steps];
+			a0 = vars[a_start + t - 1 - latency_steps];
+		}
+
+Where the actuations commands 'delta0' and 'a0' are the values of the previous one timestep.
 
 ## Dependencies
 
