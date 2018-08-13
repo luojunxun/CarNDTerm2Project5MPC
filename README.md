@@ -6,15 +6,15 @@ Self-Driving Car Engineer Nanodegree Program
 ## Rubric Points
 * The Model
 The vehicle model is a simplified model, namely bicycle model as follows:
-```
+     ```
 			x_[t+1] = x[t] + v[t] * cos(psi[t]) * dt
 			y_[t+1] = y[t] + v[t] * sin(psi[t]) * dt
 			psi_[t+1] = psi[t] + v[t] / Lf * delta[t] * dt
 			v_[t+1] = v[t] + a[t] * dt
 			cte[t+1] = f(x[t]) - y[t] + v[t] * sin(epsi[t]) * dt
 			epsi[t+1] = psi[t] - psides[t] + v[t] * delta[t] / Lf * dt
-```
- 
+     ```
+Where x, y are the position of the vehicle, psi is the heading, v is the velocity, cte refers to cross track error and epsi is the heading error. Lf is the distance between the center of mass and the axle of the fron wheel. Delta is the steering angle unit in radians. a is the acceleration with range in [-1, 1].
 
 * Timestep Length and Elaspsed Duration (N & dt)
 
