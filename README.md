@@ -5,6 +5,7 @@ Self-Driving Car Engineer Nanodegree Program
 
 ## Rubric Points
 * The Model
+
 The vehicle model is a simplified model, namely bicycle model as follows:
      ```
 			x_[t+1] = x[t] + v[t] * cos(psi[t]) * dt
@@ -17,6 +18,8 @@ The vehicle model is a simplified model, namely bicycle model as follows:
 Where x, y are the position of the vehicle, psi is the heading, v is the velocity, cte refers to cross track error and epsi is the heading error. Lf is the distance between the center of mass and the axle of the fron wheel. Delta is the steering angle unit in radians. a is the acceleration with range in [-1, 1].
 
 * Timestep Length and Elaspsed Duration (N & dt)
+
+The timestep length T=N*dt is called te prediction horizon, which refers to how long in the future the MPC controller predicts the states of the vehicle. Here I choose N=10 and dt=0.1. If the v=70 mph, the distance of the prediction would be approximately 112 meters. The smaller the dt is, the more precise the prediction would be. But since the vehicle model is not precisely equal to the true vehicle dynamics, the longer the prediction horizon is, the less precise it would be. So choosing N and dt is a trade-off and trial and error.
 
 * Polynomial Fitting and MPC Preprocessing
 
