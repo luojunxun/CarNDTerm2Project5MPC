@@ -9,12 +9,12 @@ Self-Driving Car Engineer Nanodegree Program
 The vehicle model is a simplified model, namely bicycle model as follows:
 
      
-			x_[t+1] = x[t] + v[t] * cos(psi[t]) * dt
-			y_[t+1] = y[t] + v[t] * sin(psi[t]) * dt
-			psi_[t+1] = psi[t] + v[t] / Lf * delta[t] * dt
-			v_[t+1] = v[t] + a[t] * dt
-			cte[t+1] = f(x[t]) - y[t] + v[t] * sin(epsi[t]) * dt
-			epsi[t+1] = psi[t] - psides[t] + v[t] * delta[t] / Lf * dt
+		x_[t+1] = x[t] + v[t] * cos(psi[t]) * dt
+		y_[t+1] = y[t] + v[t] * sin(psi[t]) * dt
+		psi_[t+1] = psi[t] + v[t] / Lf * delta[t] * dt
+		v_[t+1] = v[t] + a[t] * dt
+		cte[t+1] = f(x[t]) - y[t] + v[t] * sin(epsi[t]) * dt
+		epsi[t+1] = psi[t] - psides[t] + v[t] * delta[t] / Lf * dt
      
 Where x, y are the position of the vehicle, psi is the heading, v is the velocity, cte refers to cross track error and epsi is the heading error. Lf is the distance between the center of mass and the axle of the fron wheel. Delta is the steering angle unit in radians. a is the acceleration with range in [-1, 1].
 
@@ -23,6 +23,16 @@ Where x, y are the position of the vehicle, psi is the heading, v is the velocit
 The timestep length T=N*dt is called te prediction horizon, which refers to how long in the future the MPC controller predicts the states of the vehicle. Here I choose N=10 and dt=0.1. If the v=70 mph, the distance of the prediction would be approximately 112 meters. The smaller the dt is, the more precise the prediction would be. But since the vehicle model is not precisely equal to the true vehicle dynamics, the longer the prediction horizon is, the less precise it would be. So choosing N and dt is a trade-off and trial and error.
 
 * Polynomial Fitting and MPC Preprocessing
+
+All calculations should be performed in vehicle coordinates. Since the waypoints receviced from the simulator are in global (map) coordinates, they should be transformed to vehicle coordinates and be fitted to a 3rd order polynomial by:
+
+		for (unsigned int i = 0; i < len; ++i) {
+			x_wp_car(i) = cos(psi) * (ptsx[i] - px) + sin(psi) * (ptsy[i] - py);
+			y_wp_car(i) = -sin(psi) * (ptsx[i] - px) + cos(psi) * (ptsy[i] - py);
+		}
+
+		// Fit a 3rd oder polynomial to waypoints
+		auto coeffs = polyfit(x_wp_car, y_wp_car, 3);	
 
 * Model Predictive Control with Latency
 
