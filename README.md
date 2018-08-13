@@ -34,6 +34,11 @@ All calculations should be performed in vehicle coordinates. Since the waypoints
 		// Fit a 3rd oder polynomial to waypoints
 		auto coeffs = polyfit(x_wp_car, y_wp_car, 3);	
 
+Additionally, the state of the vehicle should be initialized as:
+
+		state << 0.0, 0.0, 0.0, v, cte, e_psi; //states in vehicle coordinates: x, y, psi, v, cte, e_psi
+		
+
 * Model Predictive Control with Latency
 
 
